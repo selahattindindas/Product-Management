@@ -1,0 +1,160 @@
+<div class="product-list-container">
+  <div class="list-header">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="page-title">
+          <i class="fas fa-box me-2"></i>
+          Ürün Yönetimi
+        </h2>
+        <p class="page-subtitle text-muted">
+          Ürünlerinizi görüntüleyin, düzenleyin ve yönetin
+        </p>
+      </div>
+      <button 
+        type="button" 
+        class="btn btn-primary btn-add-product" 
+        (click)="createProduct()">
+        <i class="fas fa-plus me-2"></i>
+        Yeni Ürün Ekle
+      </button>
+    </div>
+  </div>
+
+  <div class="data-grid-container">
+    <dx-data-grid 
+      [dataSource]="dataSource" 
+      keyExpr="id" 
+      [remoteOperations]="true" 
+      [showBorders]="false"
+      [rowAlternationEnabled]="true" 
+      [hoverStateEnabled]="true"
+      [wordWrapEnabled]="true" 
+      [columnAutoWidth]="true">
+      
+      <dxo-scrolling 
+        mode="standard" 
+        columnRenderingMode="standard"
+        [useNative]="false"
+        [showScrollbar]="'always'">
+      </dxo-scrolling>
+      
+      <dxo-paging [pageSize]="pageSize"></dxo-paging>
+      <dxo-pager 
+        [showPageSizeSelector]="true" 
+        [allowedPageSizes]="[5, 10, 20]" 
+        [showInfo]="true" 
+        [visible]="true">
+      </dxo-pager>
+
+      <dxi-column 
+        dataField="name" 
+        caption="Ürün Adı" 
+        [allowSorting]="true"
+        [minWidth]="200"
+        cellTemplate="productNameTemplate">
+      </dxi-column>
+      
+      <dxi-column 
+        dataField="price" 
+        caption="Fiyat" 
+        [allowSorting]="true" 
+        [minWidth]="120"
+        cellTemplate="priceTemplate">
+      </dxi-column>
+      
+      <dxi-column 
+        dataField="categoryName" 
+        caption="Kategori" 
+        [allowSorting]="true"
+        [minWidth]="150"
+        cellTemplate="categoryTemplate">
+      </dxi-column>
+      
+      <dxi-column 
+        dataField="productColors" 
+        caption="Renkler" 
+        [allowSorting]="false"
+        [minWidth]="120"
+        cellTemplate="colorsTemplate">
+      </dxi-column>
+      
+      <dxi-column 
+        dataField="createdAt" 
+        caption="Oluşturulma Tarihi" 
+        [allowSorting]="true" 
+        dataType="datetime"
+        format="dd/MM/yyyy HH:mm"
+        [minWidth]="180">
+      </dxi-column>
+      
+      <dxi-column 
+        caption="İşlemler" 
+        [allowSorting]="false" 
+        [minWidth]="120"
+        cellTemplate="actionsTemplate">
+      </dxi-column>
+
+      <div *dxTemplate="let data of 'productNameTemplate'">
+        <div class="product-name-cell">
+          <div class="product-icon">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="product-info">
+            <h6 class="product-name">{{ data.value }}</h6>
+          </div>
+        </div>
+      </div>
+
+      <div *dxTemplate="let data of 'priceTemplate'">
+        <div class="price-cell">
+          <span class="price-amount">{{ data.value | currency:'TRY':'symbol':'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div *dxTemplate="let data of 'categoryTemplate'">
+        <span 
+          class="category-badge" 
+          [ngClass]="'category-' + getCategoryClass(data.value)">
+          {{ data.value || 'Kategori Yok' }}
+        </span>
+      </div>
+
+      <div *dxTemplate="let data of 'colorsTemplate'">
+        <div class="colors-container">
+          @if (data.value && data.value.length > 0) {
+            @for (color of data.value.slice(0, 3); track color.id) {
+              <div 
+                class="color-dot" 
+                appColorFill 
+                [appColorFill]="color.colorName" 
+                [title]="color.colorName">
+              </div>
+            }
+            @if (data.value.length > 2) {
+              <div class="color-more">+{{ data.value.length - 2 }}</div>
+            }
+          } @else {
+            <span class="text-muted small">Renk Yok</span>
+          }
+        </div>
+      </div>
+
+      <div *dxTemplate="let data of 'actionsTemplate'">
+        <div class="actions-container">
+          <button 
+            class="action-btn btn-edit" 
+            title="Düzenle" 
+            (click)="editProduct(data.data.id)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button 
+            class="action-btn btn-delete" 
+            title="Sil" 
+            (click)="deleteProduct(data.data.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- Authenticated user dropdown -->
+<div class="navbar-nav" *ngIf="isAuthenticated()">
+  <div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown">
+      <i class="fas fa-user-circle me-2"></i>
+      <span>{{ currentUser()?.fullName }}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item"><i class="fas fa-user me-2"></i>Profil</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item text-danger" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i>Çıkış
+          Yap</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Login button -->
+<div class="navbar-nav" *ngIf="!isAuthenticated()">
+  <a class="nav-link" routerLink="/login"><i class="fas fa-sign-in-alt me-2"></i>Giriş Yap</a>
+</div>
+
+

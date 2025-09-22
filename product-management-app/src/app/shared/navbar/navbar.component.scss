@@ -1,0 +1,22 @@
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #fff !important;
+  
+  i {
+    color: #0d6efd;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+}

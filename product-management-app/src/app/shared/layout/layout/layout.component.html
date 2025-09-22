@@ -1,0 +1,14 @@
+<div class="admin-layout d-flex flex-column min-vh-100">
+  <app-navbar 
+    [showProductSelector]="showProductSelector()"
+    [currentProductId]="currentProductId()"
+    (productChange)="onProductChange($event)" />
+  
+  <main class="main-content flex-grow-1">
+    <div class="container-fluid py-4">
+      <router-outlet />
+    </div>
+  </main>
+  
+  <app-footer />
+</div>

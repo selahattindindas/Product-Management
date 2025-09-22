@@ -1,0 +1,17 @@
+<div class="navbar-nav me-3">
+  <dx-select-box [value]="selectedProduct()?.id" [dataSource]="productOptions()" placeholder="Ürün Seçin"
+    (onValueChanged)="onProductSelectionChange($event)" displayExpr="name" valueExpr="id"
+    [disabled]="isLoadingProducts()" class="product-selector">
+
+    <div *dxTemplate="let data of 'item'" class="product-item">
+      <span class="product-name">{{ data.name }}</span>
+      <small class="text-muted d-block">{{ data.categoryName }}</small>
+    </div>
+  </dx-select-box>
+
+  <div *ngIf="isLoadingProducts()" class="loading-spinner ms-2">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</div>
+
+

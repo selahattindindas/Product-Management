@@ -1,0 +1,9 @@
+    <app-product-form
+      [isEditMode]="false"
+      [submitButtonText]="'Ürün Oluştur'"
+      [cancelButtonText]="'İptal'"
+      [isLoading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      (formSubmitted)="onFormSubmitted($event)"
+      (formCancelled)="onFormCancelled()">
+    </app-product-form>
