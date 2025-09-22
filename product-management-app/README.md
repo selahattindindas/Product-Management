@@ -4,7 +4,7 @@ Modern Angular uygulaması ile geliştirilmiş ürün yönetim sistemi.
 
 ## 🚀 Teknolojiler
 
-- **Angular 18** - Modern framework
+- **Angular 19** - Modern framework
 - **TypeScript** - Type safety
 - **Bootstrap 5** - UI framework
 - **DevExtreme** - Data grid ve form bileşenleri
